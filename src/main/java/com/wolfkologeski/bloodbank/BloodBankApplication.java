@@ -22,27 +22,27 @@ public class BloodBankApplication {
 		SpringApplication.run(BloodBankApplication.class, args);
 	}
 
-//	@Bean
-//	CommandLineRunner runner (CandidateService candidateService) {
-//
-//		Logger LOG = getLogger(BloodBankApplication.class);
-//
-//		return args -> {
-//			// read candidates json and write into database
-//			ObjectMapper mapper = new ObjectMapper();
-//			TypeReference<List<CandidateEntity>> typeReference = new TypeReference<List<CandidateEntity>>(){};
-//			InputStream inputStream = TypeReference.class.getResourceAsStream("/candidates_data/data.json");
-//			try {
-//				LOG.error("Saving candidates information");
-//				List candidates = mapper.readValue(inputStream, typeReference);
-//				//System.out.println(candidates);
-//				candidateService.save(candidates);
-//			} catch (IOException ex) {
-//				LOG.error("An error occurred while trying to save candidates information");
-//				throw new IOException(ex.getMessage());
-//			}
-//
-//			LOG.error("Candidates saved successfully");
-//		};
-//	}
+	@Bean
+	CommandLineRunner runner (CandidateService candidateService) {
+
+		Logger LOG = getLogger(BloodBankApplication.class);
+
+		return args -> {
+			// read candidates json and write into database
+			ObjectMapper mapper = new ObjectMapper();
+			TypeReference<List<CandidateEntity>> typeReference = new TypeReference<List<CandidateEntity>>(){};
+			InputStream inputStream = TypeReference.class.getResourceAsStream("/candidates_data/data.json");
+			try {
+				LOG.error("Saving candidates information");
+				List candidates = mapper.readValue(inputStream, typeReference);
+				//System.out.println(candidates);
+				candidateService.save(candidates);
+			} catch (IOException ex) {
+				LOG.error("An error occurred while trying to save candidates information");
+				throw new IOException(ex.getMessage());
+			}
+
+			LOG.error("Candidates saved successfully");
+		};
+	}
 }
